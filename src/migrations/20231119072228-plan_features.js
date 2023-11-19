@@ -1,7 +1,9 @@
-module.exports = (sequelize, DataTypes) => {
-  const planFeatures = sequelize.define(
-    "planFeatures",
-    {
+"use strict";
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  up: async (qI, { DataTypes }) => {
+    qI.createTable("plan_features", {
       plan_feature_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -33,21 +35,8 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.NOW,
       },
       date_removed: { type: DataTypes.DATEONLY, allowNull: true },
-    },
-    {
-      tableName: "plan_features",
-      schema: "public",
-      timestamps: false,
-    }
-  );
-  planFeatures.associate = function (models) {
-    planFeatures.belongsTo(models.features, {
-      foreignKey: "feature_id",
     });
+  },
 
-    planFeatures.belongsTo(models.plans, {
-      foreignKey: "plan_id",
-    });
-  };
-  return planFeatures;
+  down: async (qI) => qI.dropTable("plan_features"),
 };

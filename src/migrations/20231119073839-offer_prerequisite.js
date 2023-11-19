@@ -1,7 +1,9 @@
-module.exports = (sequelize, DataTypes) => {
-  const offerPrerequisite = sequelize.define(
-    "offerPrerequisite",
-    {
+"use strict";
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  up: async (qI, { DataTypes }) => {
+    qI.createTable("offer_prerequisite", {
       offer_prerequisite_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -25,22 +27,8 @@ module.exports = (sequelize, DataTypes) => {
         onUpdate: "RESTRICT",
         onDelete: "RESTRICT",
       },
-    },
-    {
-      tableName: "offer_prerequisite",
-      schema: "public",
-      timestamps: false,
-    }
-  );
-  offerPrerequisite.associate = function (models) {
-    offerPrerequisite.belongsTo(models.offers, {
-      foreignkey: "offer_id",
-      as: "offers",
     });
-    offerPrerequisite.belongsTo(models.plans, {
-      foreignkey: "plan_id",
-      as: "plans",
-    });
-  };
-  return offerPrerequisite;
+  },
+
+  down: async (qI) => qI.dropTable("offer_prerequisite"),
 };

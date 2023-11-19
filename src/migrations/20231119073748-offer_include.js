@@ -1,7 +1,9 @@
-module.exports = (sequelize, DataTypes) => {
-  const offerInclude = sequelize.define(
-    "offerInclude",
-    {
+"use strict";
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  up: async (qI, { DataTypes }) => {
+    qI.createTable("offer_include", {
       offer_include_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -25,22 +27,8 @@ module.exports = (sequelize, DataTypes) => {
         onUpdate: "RESTRICT",
         onDelete: "RESTRICT",
       },
-    },
-    {
-      tableName: "offer_include",
-      timestamps: false,
-      schema: "public",
-    }
-  );
-  offerInclude.associate = function (models) {
-    offerInclude.belongsTo(models.offers, {
-      foreignkey: "offer_id",
-      as: "offers",
     });
-    offerInclude.belongsTo(models.plans, {
-      foreignkey: "plan_id",
-      as: "plans",
-    });
-  };
-  return offerInclude;
+  },
+
+  down: async (qI) => qI.dropTable("offer_include"),
 };

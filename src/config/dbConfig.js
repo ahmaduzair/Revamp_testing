@@ -1,17 +1,25 @@
 const envConfig = require("./envConfig");
 module.exports = {
-  production: {
-    username: envConfig.postgres.username,
-    password: envConfig.postgres.password,
-    database: envConfig.postgres.db,
-    host: envConfig.postgres.host,
-    port: envConfig.postgres.port,
+  development: {
+    username: "postgres",
+    password: "2426",
+    database: "trading_test",
+    host: "127.0.0.1",
+    port:"5433",
     dialect: "postgres",
-
-    logging: envConfig.env !== "production" && ((msg) => console.log(msg)),
-    define: {
-      underscored: true,
-      timestamps: true,
-    },
+  },
+  test: {
+    username: "postgres",
+    password: null,
+    database: "database_test",
+    host: "127.0.0.1",
+    dialect: "postgres",
+  },
+  production: {
+    username: "postgres",
+    password: null,
+    database: "database_production",
+    host: "127.0.0.1",
+    dialect: "postgres",
   },
 };

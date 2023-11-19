@@ -1,7 +1,9 @@
-module.exports = (sequelize, DataTypes) => {
-  const offers = sequelize.define(
-    "offers",
-    {
+"use strict";
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  up: async (qI, { DataTypes }) => {
+    qI.createTable("offers", {
       offer_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -21,13 +23,8 @@ module.exports = (sequelize, DataTypes) => {
       },
       duration_months: { type: DataTypes.INTEGER },
       duration_end_date: { type: DataTypes.DATEONLY },
-    },
-    {
-      tableName: "offers",
-      timestamps: false,
-      schema: "public",
-    }
-  );
+    });
+  },
 
-  return offers;
+  down: async (qI) => qI.dropTable("offers"),
 };

@@ -1,7 +1,9 @@
-module.exports = (sequelize, DataTypes) => {
-  const features = sequelize.define(
-    "features",
-    {
+"use strict";
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  up: async (qI, { DataTypes }) => {
+    qI.createTable("features", {
       feature_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -14,17 +16,8 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.NOW,
       },
       feature_data: { type: DataTypes.JSON, allowNull: true },
-    },
-    {
-      tableName: "features",
-      schema: "public",
-      timestamps: false,
-    }
-  );
-  features.associate = function (models) {
-    features.hasMany(models.planFeatures, {
-      foreignKey: "feature_id",
     });
-  };
-  return features;
+  },
+
+  down: async (qI) => qI.dropTable("features"),
 };
