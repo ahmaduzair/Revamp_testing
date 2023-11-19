@@ -7,7 +7,14 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      subscription_id: { type: DataTypes.BIGINT, allowNull: false },
+      subscription_id: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+          model: "subscriptions",
+          key: "subscription_id",
+        },
+      },
       plan_id: { type: DataTypes.INTEGER, allowNull: false },
       subscription_data: { type: DataTypes.JSON },
       insert_ts: {
